@@ -102,3 +102,8 @@ hr {
 input, select {
     vertical-align:middle;
 }
+
+
+.mt20 {
+    margin-top: 20px;
+}
