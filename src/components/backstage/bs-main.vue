@@ -3,7 +3,7 @@
     <el-container>
       <el-aside>
         <el-menu
-          default-active="/backstage/member"
+          :default-active="$route.path"
           class=""
           @open="handleOpen"
           @close="handleClose"
@@ -21,15 +21,15 @@
               <i class="el-icon-s-platform"></i>
               <span>广告管理</span>
             </template>
-            <el-menu-item index="">广告列表</el-menu-item>
-            <el-menu-item index="">添加广告</el-menu-item>
+            <el-menu-item index="/backstage/ad">广告列表</el-menu-item>
+            <el-menu-item index="/backstage/adAdd">添加广告</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-s-goods"></i>
               <span>产品管理</span>
             </template>
-            <el-menu-item index="">产品列表</el-menu-item>
+            <el-menu-item index="/backstage/product">产品列表</el-menu-item>
             <el-menu-item index="">添加产品</el-menu-item>
             <el-menu-item index="">产品类别</el-menu-item>
           </el-submenu>

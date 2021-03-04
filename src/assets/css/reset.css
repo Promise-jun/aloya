@@ -103,7 +103,39 @@ input, select {
     vertical-align:middle;
 }
 
+.l {
+    float: left;
+}
+.r {
+    float: right;
+}
+.fix:before,
+.fix:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}	
+* html .fix {
+	zoom: 1;
+}
+/* IE6 */
+*+html .fix {
+	zoom: 1;
+}
 
+
+.ml10 {
+    margin-left: 10px;
+}
 .mt20 {
     margin-top: 20px;
+}
+
+.red {
+    color: #F56C6C;
+}
+button.red:hover {
+    color: #f88c8c;
 }
