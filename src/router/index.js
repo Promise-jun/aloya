@@ -6,6 +6,9 @@ import memberList from '@/components/backstage/member-list';
 import adList from '@/components/backstage/ad-list';
 import adAdd from '@/components/backstage/ad-add';
 import productList from '@/components/backstage/product-list';
+import productAdd from '@/components/backstage/product-add';
+import productCategory from '@/components/backstage/product-category';
+import brandInfo from '@/components/backstage/brand-info';
 
 Vue.use(Router)
 
@@ -36,6 +39,18 @@ export default new Router({
         {
           path: 'product',
           component: productList  //产品列表
+        },
+        {
+          path: 'productAdd',
+          component: productAdd   //添加、编辑产品
+        },
+        {
+          path: 'productCategory',
+          component: productCategory  //产品类别列表
+        },
+        {
+          path: 'brandInfo',
+          component: brandInfo  //品牌介绍
         }
       ]
     }

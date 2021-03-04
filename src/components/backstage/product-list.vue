@@ -29,6 +29,35 @@
         <el-button type="primary">查询</el-button>
       </el-col>
     </el-row>
+
+    <el-table :data="tableData" border class="mt20">
+      <el-table-column prop="Id" label="产品ID"> </el-table-column>
+      <el-table-column prop="name" label="产品名称" width="380">
+      </el-table-column>
+      <el-table-column prop="price" label="原价（元）"> </el-table-column>
+      <el-table-column prop="newPrice" label="活动价（元）"> </el-table-column>
+      <el-table-column prop="ShowTime" label="修改时间"> </el-table-column>
+      <el-table-column label="操作" width="120"
+        >>
+        <template slot-scope="scope">
+          <el-button type="text" size="small">编辑</el-button>
+          <el-popconfirm title="确定删除吗？" icon-color="red" class="ml10">
+            <el-button slot="reference" type="text" size="small" class="red"
+              >删除</el-button
+            >
+          </el-popconfirm>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <div class="mt20 fix">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="1000"
+        class="r"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -56,6 +85,15 @@ export default {
         {
           value: 4,
           label: "玩教具",
+        },
+      ],
+      tableData: [
+        {
+          Id: 1,
+          ShowTime: "2016-05-02",
+          name: "TOI图益 逻辑箱子—我的小小旅行箱 6973434124038",
+          price: "198.00",
+          newPrice: "99.00",
         },
       ],
     };

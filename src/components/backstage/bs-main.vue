@@ -30,10 +30,10 @@
               <span>产品管理</span>
             </template>
             <el-menu-item index="/backstage/product">产品列表</el-menu-item>
-            <el-menu-item index="">添加产品</el-menu-item>
-            <el-menu-item index="">产品类别</el-menu-item>
+            <el-menu-item index="/backstage/productAdd">添加产品</el-menu-item>
+            <el-menu-item index="/backstage/productCategory">产品类别</el-menu-item>
           </el-submenu>
-          <el-menu-item index="">
+          <el-menu-item index="/backstage/brandInfo">
             <i class="el-icon-s-home"></i>
             <span slot="title">品牌介绍</span>
           </el-menu-item>
