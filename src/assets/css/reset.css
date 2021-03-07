@@ -103,6 +103,10 @@ input, select {
     vertical-align:middle;
 }
 
+img {
+    border: 0;
+}
+
 .l {
     float: left;
 }
@@ -138,4 +142,8 @@ input, select {
 }
 button.red:hover {
     color: #f88c8c;
+}
+
+.bg-white {
+    background-color: #ffffff;
 }

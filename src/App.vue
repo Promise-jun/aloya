@@ -21,4 +21,15 @@ export default {
 .el-popconfirm__main {
   margin: 8px 0;
 }
+
+.el-tabs .el-tabs__item {
+  padding: 0 30px;
+}
+.el-tabs .el-tabs__item:hover,
+.el-tabs .el-tabs__item.is-active {
+  color: #D1394C;
+}
+.el-tabs .el-tabs__active-bar {
+  background-color: #D1394C;
+}
 </style>

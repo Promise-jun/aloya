@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import bsMain from '@/components/backstage/bs-main';
 import memberList from '@/components/backstage/member-list';
 import adList from '@/components/backstage/ad-list';
@@ -9,6 +8,8 @@ import productList from '@/components/backstage/product-list';
 import productAdd from '@/components/backstage/product-add';
 import productCategory from '@/components/backstage/product-category';
 import brandInfo from '@/components/backstage/brand-info';
+import main from '@/components/main';
+import index from '@/components/index';
 
 Vue.use(Router)
 
@@ -17,8 +18,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'main',
+      component: main,
+      children: [
+        {
+          path: '',
+          component: index  //首页
+        }
+      ]
     },
     {
       path: '/backstage/',
