@@ -32,4 +32,8 @@ export default {
 .el-tabs .el-tabs__active-bar {
   background-color: #D1394C;
 }
+
+.el-alert__content {
+  line-height: normal;
+}
 </style>

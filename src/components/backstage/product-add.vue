@@ -1,12 +1,5 @@
 <template>
   <div>
-    <el-alert
-      title="产品图片建议尺寸：800*800，产品详情图片大小建议不要超过300kb"
-      type="warning"
-      show-icon
-      :closable="false"
-    >
-    </el-alert>
     <el-form
       :model="ruleForm"
       status-icon
@@ -16,7 +9,40 @@
       class="demo-ruleForm mt20"
     >
       <el-form-item label="产品图片" prop="pic">
-        <el-col :span="12"></el-col>
+        <el-col :span="12">
+          <el-upload action="#" list-type="picture-card" :auto-upload="false">
+            <i slot="default" class="el-icon-plus"></i>
+            <div slot="file" slot-scope="{ file }">
+              <img
+                class="el-upload-list__item-thumbnail"
+                :src="file.url"
+                alt=""
+              />
+              <span class="el-upload-list__item-actions">
+                <span class="el-upload-list__item-preview">
+                  <i class="el-icon-zoom-in"></i>
+                </span>
+                <span v-if="!disabled" class="el-upload-list__item-delete">
+                  <i class="el-icon-download"></i>
+                </span>
+                <span v-if="!disabled" class="el-upload-list__item-delete">
+                  <i class="el-icon-delete"></i>
+                </span>
+              </span>
+            </div>
+          </el-upload>
+          <p>
+            <el-button type="primary" plain>选择图片</el-button>
+            <el-alert
+              title="产品图片建议尺寸：800*800，首张图片为封面图"
+              type="warning"
+              show-icon
+              :closable="false"
+              class="mt10"
+            >
+            </el-alert>
+          </p>
+        </el-col>
       </el-form-item>
       <el-form-item label="产品名称" prop="name">
         <el-col :span="12">
@@ -72,7 +98,17 @@
         <el-radio v-model="ruleForm.type" :label="2">会员产品</el-radio>
       </el-form-item>
       <el-form-item label="产品详情" prop="detail">
-        <el-col :span="16"></el-col>
+        <el-col :span="16">
+          <editor></editor>
+          <el-alert
+            title="产品详情图片大小建议不要超过300kb"
+            type="warning"
+            show-icon
+            :closable="false"
+            class="mt10"
+          >
+          </el-alert>
+        </el-col>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')"
@@ -84,6 +120,8 @@
 </template>
 
 <script>
+import editor from "@/components/base/editor";
+
 export default {
   name: "productAdd",
   data() {
@@ -144,6 +182,9 @@ export default {
         }
       });
     },
+  },
+  components: {
+    editor,
   },
 };
 </script>
