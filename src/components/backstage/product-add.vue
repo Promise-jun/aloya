@@ -9,8 +9,13 @@
       class="demo-ruleForm mt20"
     >
       <el-form-item label="产品图片" prop="pic">
-        <el-col :span="12">
-          <el-upload action="#" list-type="picture-card" :auto-upload="false">
+        <el-col :span="16">
+          <el-upload
+            action="#"
+            list-type="picture-card"
+            :auto-upload="false"
+            multiple
+          >
             <i slot="default" class="el-icon-plus"></i>
             <div slot="file" slot-scope="{ file }">
               <img
@@ -20,28 +25,21 @@
               />
               <span class="el-upload-list__item-actions">
                 <span class="el-upload-list__item-preview">
-                  <i class="el-icon-zoom-in"></i>
+                  <i class="el-icon-edit"></i>
                 </span>
-                <span v-if="!disabled" class="el-upload-list__item-delete">
-                  <i class="el-icon-download"></i>
-                </span>
-                <span v-if="!disabled" class="el-upload-list__item-delete">
+                <span class="el-upload-list__item-delete">
                   <i class="el-icon-delete"></i>
                 </span>
               </span>
             </div>
           </el-upload>
-          <p>
-            <el-button type="primary" plain>选择图片</el-button>
-            <el-alert
-              title="产品图片建议尺寸：800*800，首张图片为封面图"
-              type="warning"
-              show-icon
-              :closable="false"
-              class="mt10"
-            >
-            </el-alert>
-          </p>
+          <el-alert
+            title="产品图片建议尺寸：800*800，首张图片为封面图，最多可上传5张"
+            type="warning"
+            show-icon
+            :closable="false"
+          >
+          </el-alert>
         </el-col>
       </el-form-item>
       <el-form-item label="产品名称" prop="name">

@@ -38,13 +38,13 @@
     border: 1px solid #eeeeee;
     overflow: hidden;
 }
-.product-list li .pic img {
+.product-list li .pic a {
     display: block;
     width: 100%;
     height: 100%;
     transition: all .2s;
 }
-.product-list li .pic:hover img {
+.product-list li .pic:hover a {
     transform: scale(1.05);
 }
 .product-list li .tit {

@@ -14,7 +14,7 @@
           <ul class="product-list fix">
             <li v-for="item in tabList[index].list" :key="item.pic">
               <div class="pic">
-                <a href="javascript:;"><img :src="item.pic" alt="" /></a>
+                <a href="javascript:;" :style="{background: 'url('+item.pic+') no-repeat center', backgroundSize: 'contain'}"></a>
               </div>
               <div class="tit">
                 <a href="javascript:;">{{ item.title }}</a>
@@ -33,7 +33,7 @@
         <ul class="product-list fix">
           <li v-for="item in list" :key="item.pic">
             <div class="pic">
-              <a href="javascript:;"><img :src="item.pic" alt="" /></a>
+              <a href="javascript:;" :style="{background: 'url('+item.pic+') no-repeat center', backgroundSize: 'contain'}"></a>
             </div>
             <div class="tit">
               <a href="javascript:;">{{ item.title }}</a>
