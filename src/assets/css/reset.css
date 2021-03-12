@@ -27,6 +27,7 @@ time, mark, audio, video {
 	-webkit-box-sizing:border-box; /* Safari */
 }
 body {
+    font-size: 14px;
     line-height:1;
     background-color: #f0f2f5;
 }
@@ -136,8 +137,15 @@ img {
 .mt10 {
     margin-top: 10px;
 }
+.ml20 {
+    margin-left: 20px;
+}
 .mt20 {
     margin-top: 20px;
+}
+
+.ptb20 {
+    padding: 20px 0;
 }
 
 .red {

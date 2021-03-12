@@ -32,9 +32,9 @@
       <div class="nav-box">
           <div class="container">
               <ul>
-                  <li><a href="javascript:;">首页</a></li>
-                  <li><a href="javascript:;">产品列表</a></li>
-                  <li><a href="javascript:;">品牌介绍</a></li>
+                  <li><router-link tag="a" to="/">首页</router-link></li>
+                  <li><router-link tag="a" to="/product">产品列表</router-link></li>
+                  <li><router-link tag="a" to="/brand">品牌介绍</router-link></li>
               </ul>
           </div>
       </div>

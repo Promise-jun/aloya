@@ -10,6 +10,8 @@ import productCategory from '@/components/backstage/product-category';
 import brandInfo from '@/components/backstage/brand-info';
 import main from '@/components/main';
 import index from '@/components/index';
+import product from '@/components/product';
+import brand from '@/components/brand';
 
 Vue.use(Router)
 
@@ -24,6 +26,14 @@ export default new Router({
         {
           path: '',
           component: index  //首页
+        },
+        {
+          path: 'product',
+          component: product  //产品列表及搜索
+        },
+        {
+          path: 'brand',
+          component: brand  //品牌介绍页
         }
       ]
     },

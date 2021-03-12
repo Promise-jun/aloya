@@ -36,4 +36,15 @@ export default {
 .el-alert__content {
   line-height: normal;
 }
+
+.list-page {
+  padding: 30px 0;
+  text-align: center;
+}
+.list-page .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #d1394c;
+}
+.list-page .el-pager li:hover {
+  color: #d1394c !important;
+}
 </style>
