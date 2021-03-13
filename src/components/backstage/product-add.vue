@@ -66,10 +66,10 @@
         <el-col :span="16">
           <el-input
             type="textarea"
-            :rows="5"
+            :rows="8"
             placeholder="请输入产品简介"
             v-model="ruleForm.abstract"
-            maxlength="200"
+            maxlength="300"
             show-word-limit
           >
           </el-input>

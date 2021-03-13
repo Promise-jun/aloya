@@ -41,12 +41,14 @@
       </el-aside>
       <el-container class="main-box">
         <el-header>
-          <el-dropdown>
+          <h1 class="l">Aloya后台管理系统</h1>
+          <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
               wolegejun<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item command="index">网站首页</el-dropdown-item>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -71,6 +73,13 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
+    handleCommand(command) {
+      if (command == "index") {
+        this.$router.push('/');
+      } else if (command == "logout") {
+        
+      }
+    }
   },
 };
 </script>
@@ -117,5 +126,11 @@ export default {
   cursor: pointer;
   font-size: 16px;
   color: #000000;
+}
+
+h1 {
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
 }
 </style>

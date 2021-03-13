@@ -12,6 +12,7 @@ import main from '@/components/main';
 import index from '@/components/index';
 import product from '@/components/product';
 import brand from '@/components/brand';
+import productDetail from '@/components/product-detail';
 
 Vue.use(Router)
 
@@ -34,6 +35,10 @@ export default new Router({
         {
           path: 'brand',
           component: brand  //品牌介绍页
+        },
+        {
+          path: 'productDetail/:id',
+          component: productDetail  //产品详情
         }
       ]
     },

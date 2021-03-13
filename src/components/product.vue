@@ -36,7 +36,7 @@
       </el-row>
 
       <ul class="product-list fix">
-        <li v-for="(item, index) in list" :key="index">
+        <li v-for="(item, index) in list" :key="index" @click="openDetail">
           <div class="pic">
             <a
               href="javascript:;"
@@ -219,6 +219,10 @@ export default {
     maxPriceChange(e) {
       this.maxPrice = e.target.value;
     },
+    // 产品详情
+    openDetail() {
+      this.$router.push('/productDetail/' + 123456)
+    }
   },
 };
 </script>
