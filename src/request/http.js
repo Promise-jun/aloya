@@ -4,13 +4,14 @@
  */
 import axios from 'axios';
 import router from '../router';
+import ElementUI from 'element-ui';
 
 /** 
 * 提示函数 
 * 禁止点击蒙层、显示一秒后关闭
 */
 const tip = msg => {
-    this.$message(msg);
+    ElementUI.Message(msg);
 }
 
 /**
@@ -107,7 +108,7 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
     // 请求成功
-    res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
+    res => res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.data),
     // 请求失败
     error => {
         const { response } = error;

@@ -13,12 +13,18 @@ import index from '@/components/index';
 import product from '@/components/product';
 import brand from '@/components/brand';
 import productDetail from '@/components/product-detail';
+import login from '@/components/login';
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: login  //登录页面
+    },
     {
       path: '/',
       name: 'main',

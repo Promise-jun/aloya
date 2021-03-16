@@ -7,14 +7,14 @@
           <span>Aloya</span>
         </div>
         <div class="user-box r">
-          <!-- <a href="javascript:;" class="login-btn">会员登录</a> -->
-          <div class="user-info">
+          <router-link tag="a" to="/login" class="login-btn">会员登录</router-link>
+          <!-- <div class="user-info">
             <p class="user-name">admin</p>
             <p class="operate">
               <router-link tag="a" to="/backstage/member">管理中心</router-link>
               <a href="javascript:;">退出</a>
             </p>
-          </div>
+          </div> -->
         </div>
         <div class="conter">
           <div class="search">

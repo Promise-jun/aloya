@@ -186,8 +186,9 @@ export default {
   },
   created() {
     this.$api.backstage.userListApi({
-      UserName: 'admin',
-      PassWord: 'admin123'
+      KeyWord: '',
+      Start: 0,
+      PageSize: 10
     }).then(res => {
       console.log(res)
     })
