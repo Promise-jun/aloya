@@ -8,15 +8,19 @@
         <el-button type="primary">查询</el-button>
       </el-col>
     </el-row>
-    <el-table :data="tableData" border class="mt20">
+    <el-table v-loading="loading" :data="tableData" border class="mt20">
       <el-table-column prop="Id" label="用户ID"> </el-table-column>
       <el-table-column prop="UserName" label="用户名"> </el-table-column>
       <el-table-column prop="ShowTime" label="创建时间"> </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="resetPass(scope.row)">重置密码</el-button>
+          <el-button type="text" size="small" @click="resetPass(scope.row)"
+            >重置密码</el-button
+          >
           <el-popconfirm title="确定删除吗？" icon-color="red" class="ml10">
-            <el-button slot="reference" type="text" size="small" class="red">删除</el-button>
+            <el-button slot="reference" type="text" size="small" class="red"
+              >删除</el-button
+            >
           </el-popconfirm>
         </template>
       </el-table-column>
@@ -26,7 +30,8 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="total"
+        @current-change="pageChange"
       ></el-pagination>
     </div>
   </div>
@@ -38,14 +43,15 @@ export default {
   data() {
     return {
       keyword: "",
-      tableData: [
-        {
-          Id: 1,
-          ShowTime: "2016-05-02",
-          UserName: "a123456789",
-        },
-      ],
+      tableData: [],
+      total: 0, //总个数
+      start: 0,
+      pageSize: 10,
+      loading: false,
     };
+  },
+  created() {
+    this.getList();
   },
   methods: {
     // 创建会员
@@ -60,7 +66,31 @@ export default {
       this.$alert("新密码：123456", "密码重置成功", {
         callback: (action) => {},
       });
-    }
+    },
+    // 页码改变
+    pageChange(page) {
+      this.start = this.pageSize * (page - 1);
+      this.getList();
+    },
+    getList() {
+      // 获取用户列表
+      this.loading = true;
+      this.$api.backstage
+        .userListApi({
+          KeyWord: this.keyword,
+          Start: this.start,
+          PageSize: this.pageSize,
+        })
+        .then((res) => {
+          this.loading = false;
+          if (res.Code == 0) {
+            if (this.start == 0) {
+              this.total = res.Data.Total;
+            }
+            this.tableData = res.Data.Items ? res.Data.Items : [];
+          }
+        });
+    },
   },
 };
 </script>

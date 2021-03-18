@@ -1,9 +1,16 @@
-import base from './base'; // 导入接口域名列表
+// import base from './base'; // 导入接口域名列表
 import axios from '@/request/http'; // 导入http中创建的axios实例
 
 const backstage = {    
+    // 管理员登录
+    adminLoginApi(params) {
+        return axios.post('/gateway/', {
+            Name: "OA.User.Login",
+            Content: JSON.stringify(params)
+        })
+    },
     // 获取用户列表    
-    userListApi (params) {        
+    userListApi(params) {        
         return axios.post(`/gateway/`, {
             Name: "OA.User.GetList",
             Content: JSON.stringify(params)

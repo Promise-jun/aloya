@@ -2,6 +2,7 @@
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
  */
+import Vue from 'vue'
 import axios from 'axios';
 import router from '../router';
 import ElementUI from 'element-ui';
@@ -11,7 +12,7 @@ import ElementUI from 'element-ui';
 * 禁止点击蒙层、显示一秒后关闭
 */
 const tip = msg => {
-    ElementUI.Message(msg);
+    ElementUI.Message.error(msg);
 }
 
 /**
@@ -34,26 +35,28 @@ const toLogin = () => {
 const errorHandle = (status, other) => {
     // 状态码判断
     switch (status) {
-        // 401: 未登录状态，跳转登录页
-        case 401:
+        // 9000002: 失效
+        case 9000002:
+            tip('登录失效');
             toLogin();
             break;
-        // 403 token过期
-        // 清除token并跳转登录页
-        case 403:
-            tip('登录过期，请重新登录');
-            localStorage.removeItem('token');
+        // 4100001 无帐号
+        case 4100001:
+            tip('账户不存在');
+            toLogin();
+            // localStorage.removeItem('token');
             // store.commit('loginSuccess', null);
-            setTimeout(() => {
-                toLogin();
-            }, 1000);
+            // setTimeout(() => {
+            //     toLogin();
+            // }, 1000);
             break;
-        // 404请求不存在
-        case 404:
-            tip('请求的资源不存在');
+        // 9000004 踢下线
+        case 9000004:
+            tip('您的账户已在其他设备登录，如非本人操作，请联系我们');
+            toLogin();
             break;
         default:
-            console.log(other);
+            tip(other);
     }
 }
 
@@ -74,14 +77,14 @@ instance.interceptors.request.use(
         // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token        
         // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码        
         // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。   
-
+        let adminUser = Vue.prototype.$cookies.get('admin_userInfo');
         if (config.method === 'post') {
             let data = config.data
             config.data = {
                 AccountId: "",
                 Token: "",
-                AdminUserId: "",
-                AdminToken: "",
+                AdminUserId: adminUser && adminUser.userId ? adminUser.userId : "",
+                AdminToken: adminUser && adminUser.token ? adminUser.token : "",
                 Version: "V1.0.0",
                 Source: "PC",
                 Ip: "",
@@ -91,8 +94,8 @@ instance.interceptors.request.use(
             config.params = {
                 AccountId: "",
                 Token: "",
-                AdminUserId: "",
-                AdminToken: "",
+                AdminUserId: adminUser && adminUser.userId ? adminUser.userId : "",
+                AdminToken: adminUser && adminUser.token ? adminUser.token : "",
                 Version: "V1.0.0",
                 Source: "PC",
                 Ip: "",
@@ -108,7 +111,16 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
     // 请求成功
-    res => res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.data),
+    res => {
+        if (res.status === 200) {
+            if (res.data.Code !== 0) {
+                errorHandle(res.data.Code, res.data.ErrorMessage);
+            }
+            return Promise.resolve(res.data)
+        } else {
+            return Promise.reject(res.data)
+        }
+    },
     // 请求失败
     error => {
         const { response } = error;

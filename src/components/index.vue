@@ -183,15 +183,6 @@ export default {
         },
       ],
     };
-  },
-  created() {
-    this.$api.backstage.userListApi({
-      KeyWord: '',
-      Start: 0,
-      PageSize: 10
-    }).then(res => {
-      console.log(res)
-    })
   }
 };
 </script>

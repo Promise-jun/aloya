@@ -7,14 +7,14 @@
           <span>Aloya</span>
         </div>
         <div class="user-box r">
-          <router-link tag="a" to="/login" class="login-btn">会员登录</router-link>
-          <!-- <div class="user-info">
-            <p class="user-name">admin</p>
+          <div class="user-info" v-if="userInfo && userInfo.userId">
+            <p class="user-name">{{userInfo.userName}}</p>
             <p class="operate">
               <router-link tag="a" to="/backstage/member">管理中心</router-link>
               <a href="javascript:;">退出</a>
             </p>
-          </div> -->
+          </div>
+          <router-link v-else tag="a" to="/login" class="login-btn">会员登录</router-link>
         </div>
         <div class="conter">
           <div class="search">
@@ -44,7 +44,24 @@
 
 <script>
 export default {
-  name: "main"
+  name: "main",
+  data() {
+    return {
+      userInfo: {}
+    }
+  },
+  created() {
+    // 用户信息
+    let adminUser = this.$cookies.get('admin_userInfo');
+    let user = this.$cookies.get('userInfo');
+    if (adminUser) {
+      this.userInfo = adminUser;
+    } else if (user) {
+      this.userInfo = user;
+    } else {
+      this.userInfo = {};
+    }
+  }
 };
 </script>
 

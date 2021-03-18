@@ -44,7 +44,7 @@
           <h1 class="l">Aloya后台管理系统</h1>
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
-              wolegejun<i class="el-icon-arrow-down el-icon--right"></i>
+              {{userInfo.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="index">网站首页</el-dropdown-item>
@@ -64,7 +64,12 @@
 export default {
   name: "bsMain",
   data() {
-    return {};
+    return {
+      userInfo: {}
+    };
+  },
+  created() {
+    this.userInfo = this.$cookies.get('admin_userInfo');
   },
   methods: {
     handleOpen(key, keyPath) {
