@@ -5,8 +5,6 @@
         <el-menu
           :default-active="$route.path"
           class=""
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#304156"
           text-color="#fff"
           active-text-color="#1890ff"
@@ -31,7 +29,9 @@
             </template>
             <el-menu-item index="/backstage/product">产品列表</el-menu-item>
             <el-menu-item index="/backstage/productAdd">添加产品</el-menu-item>
-            <el-menu-item index="/backstage/productCategory">产品类别</el-menu-item>
+            <el-menu-item index="/backstage/productCategory"
+              >产品类别</el-menu-item
+            >
           </el-submenu>
           <el-menu-item index="/backstage/brandInfo">
             <i class="el-icon-s-home"></i>
@@ -44,7 +44,8 @@
           <h1 class="l">Aloya后台管理系统</h1>
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
-              {{userInfo.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+              {{ userInfo.userName
+              }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="index">网站首页</el-dropdown-item>
@@ -61,30 +62,49 @@
 </template>
 
 <script>
+import { removeUserCookie } from "@/assets//js/validate.js";
+
 export default {
   name: "bsMain",
   data() {
     return {
-      userInfo: {}
+      userInfo: {},
     };
   },
   created() {
-    this.userInfo = this.$cookies.get('admin_userInfo');
+    this.userInfo = this.$cookies.get("admin_userInfo");
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     handleCommand(command) {
       if (command == "index") {
-        this.$router.push('/');
+        this.$router.push("/");
       } else if (command == "logout") {
-        
+        this.$confirm("确定要退出后台管理系统吗?", "退出提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }).then(() => {
+          this.$api.load.show();
+          this.$api.backstage
+            .userLogoutApi({
+              Type: 1,
+            })
+            .then((res) => {
+              this.$api.load.hide();
+              if (res.Code == 0) {
+                removeUserCookie(this, "admin_userInfo");
+                this.$router.push({
+                  path: "/login",
+                  query: {
+                    type: "interior",
+                    redirect: this.$route.fullPath,
+                  },
+                });
+              }
+            });
+        });
       }
-    }
+    },
   },
 };
 </script>

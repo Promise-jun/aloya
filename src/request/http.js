@@ -20,9 +20,11 @@ const tip = msg => {
  * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
 const toLogin = () => {
+    let isOa = router.currentRoute.fullPath.indexOf('backstage') > -1;
     router.replace({
         path: '/login',
         query: {
+            type: isOa ? 'interior' : '',
             redirect: router.currentRoute.fullPath
         }
     });

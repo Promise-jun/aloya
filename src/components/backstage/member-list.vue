@@ -5,7 +5,7 @@
         <el-input v-model="keyword" placeholder="请输入关键词"></el-input>
       </el-col>
       <el-col :span="6">
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="searchList">查询</el-button>
       </el-col>
     </el-row>
     <el-table v-loading="loading" :data="tableData" border class="mt20">
@@ -17,7 +17,12 @@
           <el-button type="text" size="small" @click="resetPass(scope.row)"
             >重置密码</el-button
           >
-          <el-popconfirm title="确定删除吗？" icon-color="red" class="ml10">
+          <el-popconfirm
+            title="确定删除吗？"
+            icon-color="red"
+            class="ml10"
+            @confirm="delUser(scope)"
+          >
             <el-button slot="reference" type="text" size="small" class="red"
               >删除</el-button
             >
@@ -56,16 +61,59 @@ export default {
   methods: {
     // 创建会员
     createMember() {
-      this.$alert("用户名：a123456<br/>密码：123456", "会员创建成功", {
-        dangerouslyUseHTMLString: true,
-        callback: (action) => {},
+      this.$api.load.show();
+      this.$api.backstage.addUserApi().then((res) => {
+        this.$api.load.hide();
+        if (res.Code == 0) {
+          this.$alert(
+            "用户名：" + res.Data.UserName + "<br/>密码：" + res.Data.PassWord,
+            "会员创建成功",
+            {
+              dangerouslyUseHTMLString: true,
+              callback: (action) => {},
+            }
+          );
+        }
       });
     },
     // 重置密码
     resetPass(item) {
-      this.$alert("新密码：123456", "密码重置成功", {
-        callback: (action) => {},
-      });
+      this.$api.load.show();
+      this.$api.backstage
+        .userResetPassApi({
+          UserId: item.Id,
+        })
+        .then((res) => {
+          this.$api.load.hide();
+          if (res.Code == 0) {
+            this.$alert("新密码：" + res.Data.PassWord, "密码重置成功", {
+              callback: (action) => {},
+            });
+          }
+        });
+    },
+    // 删除会员
+    delUser(obj) {
+      this.$api.load.show();
+      this.$api.backstage
+        .delUserApi({
+          UserId: obj.row.Id,
+        })
+        .then((res) => {
+          this.$api.load.hide();
+          if (res.Code == 0) {
+            this.tableData.splice(obj.$index, 1);
+            this.$message({
+              message: "删除成功",
+              type: "success",
+            });
+          }
+        });
+    },
+    // 查询
+    searchList() {
+      this.start = 0;
+      this.getList();
     },
     // 页码改变
     pageChange(page) {
